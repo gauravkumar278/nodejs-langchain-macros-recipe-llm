@@ -1,0 +1,27 @@
+{
+  "name": "openai-langchainjs-reciepe-generation",
+  "version": "1.0.0",
+  "description": "Generate meal using openai and langchain",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "omacros": "node openai_macros.js",
+    "gmacros": "node gemini_macros.js",
+    "gmeals": "node gemini_meal_plan.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "openai",
+    "langchainjs",
+    "ai"
+  ],
+  "author": "Gaurav Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "@langchain/core": "^0.3.3",
+    "@langchain/google-genai": "^0.1.0",
+    "@langchain/openai": "^0.3.0",
+    "dotenv": "^16.4.5",
+    "zod": "^3.23.8"
+  }
+}
