@@ -13,9 +13,7 @@ Choose from different diet types such as Keto, Vegan, etc.
 
 Use only available ingredients to ensure optimized meal planning.
 
-Optionally generate images for the meals if a pre-existing image is not found in the database using SDXL API.
-
-Calculate total pricing for each meal based on ingredient costs.
+Generate realistic meal images using OpenAI’s DALL·E 3 when meal images are not available in the database.
 
 # Features
 AI Meal Generation: Generate breakfast, lunch, and dinner meals based on user preferences and available ingredients.
@@ -24,8 +22,9 @@ Macros Calculation: Calculates and provides macro breakdown (protein, fat, carbs
 
 Diet Types: Supports custom diet types like Keto, Vegan, etc.
 
-Image Generation: Integrates with the SDXL API to generate meal images.
+Photorealistic Meal Images: Generate realistic meal images using OpenAI’s DALL·E 3 when meal images are not available in the database.
 
+Dynamic Ingredients: Integrate available ingredients from the database, making each meal practical to prepare.
 
 # Technologies
 Node.js: Backend development environment.
@@ -36,8 +35,7 @@ Gemini AI / OpenAI: AI models to generate meal plans.
 
 MongoDB: Database for storing available ingredients and recipes.
 
-SDXL API: To generate images for meals that do not already have a corresponding image.
-
+DALL·E 3 API: For generating natural, DSLR-like food images.
 
 # Environment Variables
 Ensure you have the following environment variables set in your .env file:
@@ -47,5 +45,3 @@ GOOGLE_API_KEY: API key for Gemini AI from Google.
 OPENAI_API_KEY: API key for Open AI.
 
 MONGO_URI: Your MongoDB connection string.
-
-SDXL_API_KEY: API key for the SDXL API to generate meal images.
