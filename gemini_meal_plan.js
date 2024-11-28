@@ -80,7 +80,7 @@ const availableIngredients = [
         description: "Skinless, boneless chicken breast",
         nutrition: { proteins: 31, fats: 3.6, carbohydrates: 0 },
         price: 5.99,
-        unit: "kg",
+        unit: "g",
         stock: "instock",
         status: "active"
     },
