@@ -33,7 +33,25 @@ Weight: {weight} kg
 Height: {height} cm
 Activity Level: {activityLevel}
 Goal: {goal}
-Dietary Preferences: {dietaryPreferences}
+
+Please provide:
+1. Calculate BMR using the Mifflin-St Jeor equation
+2. Apply appropriate activity multiplier to get TDEE
+3. Adjust calories based on goal
+4. Provide macro distribution optimized for the goal
+5. Include meal timing recommendations
+6. Add specific dietary and supplement recommendations
+
+Consider:
+- Protein needs for muscle preservation/growth
+- Carb requirements for activity level
+- Essential fat intake for hormone function
+
+- The 2015-2020 Dietary Guidelines for Americans recommends eating within the following ranges:
+
+Carbohydrates: 45%-65% of calories
+Fat: 25%-35% of calories
+Protein: 10%-30% of calories
 
 Provide a structured output with the recommended daily intake for calories, protein, carbs, and fats, along with a brief explanation.
 Ensure that the macronutrient breakdown is appropriate for the user's goals and dietary preferences.
@@ -46,12 +64,11 @@ Ensure that the macronutrient breakdown is appropriate for the user's goals and 
 
 // Example user input
 const userInput = {
-    age: 32,
-    weight: 64,
-    height: 175,
-    activityLevel: "Daily Active",
-    goal: "muscle gain",
-    dietaryPreferences: "None"
+    age: 25,
+    weight: 85,
+    height: 181,
+    activityLevel: "Active",
+    goal: "Weight Loss"
 };
 
 (async () => {
