@@ -67,11 +67,23 @@ const calculateMacrosInGrams = (targetCalories) => {
     };
 };
 
+// Adjust calories for 0.5 kg/week weight change
+const adjustCaloriesForObjective = (tdee, objective) => {
+    const calorieAdjustment = 550; // Calorie adjustment for 0.5 kg/week
+    if (objective.toLowerCase() === "weight gain") {
+        return tdee + calorieAdjustment; // Add calories for weight gain
+    } else if (objective.toLowerCase() === "weight loss") {
+        return tdee - calorieAdjustment; // Subtract calories for weight loss
+    } else {
+        return tdee; // Maintain current weight
+    }
+};
+
 const generateExplanation = (gender, activity, goal, targetCalories) => {
     const calorieDistribution = {
-        breakfast: Math.round(targetCalories * 0.33), // 33% of daily calories
-        lunch: Math.round(targetCalories * 0.33),    // 33% of daily calories
-        dinner: Math.round(targetCalories * 0.34)    // 34% of daily calories
+        breakfast: Math.round(targetCalories * 0.35), // 35% of daily calories
+        lunch: Math.round(targetCalories * 0.35),    // 35% of daily calories
+        dinner: Math.round(targetCalories * 0.30)    // 30% of daily calories
     };
 
     return `This macro breakdown is designed for a ${gender} with a ${activity.toLowerCase()} activity level and a ${goal.toLowerCase()} objective. The total daily calorie intake is set at ${targetCalories} calories, with a focus on consuming sufficient protein to support muscle mass during ${goal.toLowerCase()}. The meals are distributed as follows:
@@ -83,9 +95,9 @@ const generateExplanation = (gender, activity, goal, targetCalories) => {
 const calculateMacroBreakdown = (targetCalories, gender, activity, goal) => {
     const macrosInGrams = calculateMacrosInGrams(targetCalories);
     const calorieDistribution = {
-        breakfast: Math.round(targetCalories * 0.33),
-        lunch: Math.round(targetCalories * 0.33),
-        dinner: Math.round(targetCalories * 0.34)
+        breakfast: Math.round(targetCalories * 0.35), // 35% of daily calories
+        lunch: Math.round(targetCalories * 0.35),    // 35% of daily calories
+        dinner: Math.round(targetCalories * 0.30)    // 30% of daily calories
     };
 
     return {
@@ -122,6 +134,7 @@ const calculateMacroBreakdown = (targetCalories, gender, activity, goal) => {
     };
 };
 
+
 // Example usage
 const calculateNutritionPlan = (userProfile) => {
     try {
@@ -140,7 +153,12 @@ const calculateNutritionPlan = (userProfile) => {
         ));
 
         const tdee = calculateTDEE(bmr, userProfile.activity);
-        const macroBreakdown = calculateMacroBreakdown(tdee, userProfile.gender, userProfile.activity, userProfile.objective);
+        console.log("tdee", tdee);
+        // Adjust calories for weight gain or loss
+        const targetCalories = adjustCaloriesForObjective(tdee, userProfile.objective);
+        console.log("targetCalories", targetCalories);
+
+        const macroBreakdown = calculateMacroBreakdown(targetCalories, userProfile.gender, userProfile.activity, userProfile.objective);
 
         return {
             ...macroBreakdown,
@@ -167,38 +185,26 @@ const calculateNutritionPlan = (userProfile) => {
 
 // Example profiles
 const exampleImperialProfile = {
-    gender: "male",
-    age: 18,
-    height: "5 feet 8 inches",
-    weight: "75 lbs",
-    unit: "imperial",
-    activity: "Moderately Active",
+    gender: "female",
+    age: 25,
+    height: "170",
+    weight: "60 kg",
+    unit: "metric",
+    activity: "Sedentary",
     objective: "Weight Gain"
 };
 
 const exampleMetricProfile = {
-    gender: "male",
+    gender: "female",
     age: 18,
     height: "170",
-    weight: "75 kg",
+    weight: "60 kg",
     unit: "metric",
-    activity: "Moderately Active",
-    objective: "Weight Gain"
+    activity: "Sedentary",
+    objective: "Weight Loss"
 };
 
-// // Calculate and display results
-// const result = calculateNutritionPlan(exampleProfile);
-// console.log(JSON.stringify(result, null, 2));
-
 // Calculate and display results
-console.log("Imperial Result:", JSON.stringify(calculateNutritionPlan(exampleImperialProfile), null, 2));
-console.log("Metric Result:", JSON.stringify(calculateNutritionPlan(exampleMetricProfile), null, 2));
+console.log("Weight Gain Result:", JSON.stringify(calculateNutritionPlan(exampleImperialProfile), null, 2));
+console.log("Weight Loss Result:", JSON.stringify(calculateNutritionPlan(exampleMetricProfile), null, 2));
 
-// export {
-//     calculateNutritionPlan,
-//     calculateBMR,
-//     calculateTDEE,
-//     calculateMacrosInGrams,
-//     ACTIVITY_MULTIPLIERS,
-//     NUTRITION_CONSTANTS
-// };
